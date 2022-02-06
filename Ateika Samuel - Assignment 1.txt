@@ -1,0 +1,154 @@
+Ateika Samuel
+School of Professional Studies
+IS 362 001[30467]
+Assignment 1
+February 6, 2022
+
+1. a. How many airplanes have listed speeds? 
+Ans: There are 23 planes with listed speeds
+Query: SELECT COUNT(*) AS "Planes with listed speed" FROM planes 
+	WHERE speed IS NOT NULL;
+
+1. b. What is the minimum listed speed and the maximum listed speed? 
+Ans: The maximum speed is 432 & the minimum speed is 90
+Query: SELECT MAX(speed) AS "The Max Speed listed of all of the planes" FROM planes;
+
+Query: SELECT  MIN(speed) AS "The Min Speed listed of all of the planes" FROM planes;
+
+2. a. What is the total distance flown by all of the planes in January 2013? 
+Ans: The total distance flown by all of the planes in January 2013 is 27188805
+Query: SELECT SUM(distance) AS "Total Distance flown by all planes for Jan 2013" FROM flights 
+	WHERE (year = 2013 AND month = 1);
+
+2. b. What is the total distance flown by all of the planes in January 2013 where the tailnum is missing?
+Ans: The total distance flown by all of the planes in January 2013 where the tailnum is missing is Null.
+Query: SELECT SUM(distance) AS "Total Distance flown by all planes for Jan 2013 without Tail Numbers" FROM flights 
+	WHERE (year = 2013 AND month = 1 AND tailnum = NULL);
+
+3. What is the total distance flown for all planes on July 5,2013 grouped by aircraft manufacturer? Write this
+statement first using an INNER JOIN, then using a LEFT
+OUTER JOIN. How do your results compare?
+Ans: Airbus topped for the planes that flew the most distance on July 5, 2013. However, there are 127671 planes that did not have a manufacturer listed when using the Left Outer Join, a part from that the results were near identical. 
+
+Inner Join:
+195089	AIRBUS
+78786	AIRBUS INDUSTRIE
+335028	BOEING
+77909	EMBRAER
+1142	CANADAIR
+31160	BOMBARDIER INC
+7486	MCDONNELL DOUGLAS
+2199	AMERICAN AIRCRAFT INC
+15690	MCDONNELL DOUGLAS AIRCRAFT CO
+4767	MCDONNELL DOUGLAS CORPORATION
+2898	CESSNA
+1157	GULFSTREAM AEROSPACE
+1089	DOUGLAS
+937	BARKER JACK L
+
+Query: SELECT SUM(distance) AS "Total distance Flown on July 5 2013 (Inner Join)", manufacturer AS "Manufacturer" FROM flights
+	INNER JOIN planes ON flights.tailnum = planes.tailnum
+	WHERE (flights.year = 2013 AND flights.month = 7 AND flights.day = 5)
+	GROUP BY manufacturer;
+
+Left Join:
+195089	AIRBUS
+78786	AIRBUS INDUSTRIE
+335028	BOEING
+127671	
+77909	EMBRAER
+1142	CANADAIR
+31160	BOMBARDIER INC
+7486	MCDONNELL DOUGLAS
+2199	AMERICAN AIRCRAFT INC
+15690	MCDONNELL DOUGLAS AIRCRAFT CO
+4767	MCDONNELL DOUGLAS CORPORATION
+2898	CESSNA
+1157	GULFSTREAM AEROSPACE
+1089	DOUGLAS
+937	BARKER JACK L
+
+Query: SELECT SUM(distance) AS "Total distance Flown on July 5 2013 (Left Join)", manufacturer AS "Manufacturer" FROM flights
+	LEFT JOIN planes ON flights.tailnum = planes.tailnum
+        WHERE (flights.year = 2013 AND flights.month = 7 AND flights.day = 5)
+        GROUP BY manufacturer;
+
+
+4. My own query: What are the total amount of flights that originated from each airport grouped by manufacturer in February 2013.
+Ans:
+606	Newark Liberty Intl	AIRBUS
+3088	Newark Liberty Intl	BOEING
+1614	La Guardia	AIRBUS INDUSTRIE
+2119	John F Kennedy Intl	AIRBUS
+9	John F Kennedy Intl	BEECH
+54	John F Kennedy Intl	CANADAIR
+2289	La Guardia	
+3436	Newark Liberty Intl	EMBRAER
+1309	La Guardia	BOEING
+790	La Guardia	AIRBUS
+1651	John F Kennedy Intl	BOEING
+500	John F Kennedy Intl	AIRBUS INDUSTRIE
+17	John F Kennedy Intl	ROBINSON HELICOPTER CO
+1025	Newark Liberty Intl	AIRBUS INDUSTRIE
+1106	John F Kennedy Intl	EMBRAER
+1272	John F Kennedy Intl	BOMBARDIER INC
+596	Newark Liberty Intl	
+1449	John F Kennedy Intl	
+267	Newark Liberty Intl	BOMBARDIER INC
+366	La Guardia	EMBRAER
+363	La Guardia	MCDONNELL DOUGLAS AIRCRAFT CO
+17	John F Kennedy Intl	CIRRUS DESIGN CORP
+62	Newark Liberty Intl	MCDONNELL DOUGLAS
+139	John F Kennedy Intl	MCDONNELL DOUGLAS AIRCRAFT CO
+87	La Guardia	CESSNA
+54	La Guardia	GULFSTREAM AEROSPACE
+161	La Guardia	MCDONNELL DOUGLAS
+270	La Guardia	BOMBARDIER INC
+45	La Guardia	MCDONNELL DOUGLAS CORPORATION
+6	John F Kennedy Intl	DOUGLAS
+11	Newark Liberty Intl	CESSNA
+40	La Guardia	CANADAIR
+16	John F Kennedy Intl	MCDONNELL DOUGLAS CORPORATION
+1	Newark Liberty Intl	HURLEY JAMES LARRY
+3	La Guardia	BARKER JACK L
+10	John F Kennedy Intl	CESSNA
+2	John F Kennedy Intl	BELL
+1	Newark Liberty Intl	STEWART MACO
+24	John F Kennedy Intl	BARKER JACK L
+3	La Guardia	AMERICAN AIRCRAFT INC
+7	La Guardia	CIRRUS DESIGN CORP
+1	Newark Liberty Intl	LAMBERT RICHARD
+13	John F Kennedy Intl	CANADAIR LTD
+3	John F Kennedy Intl	LEARJET INC
+4	John F Kennedy Intl	GULFSTREAM AEROSPACE
+6	La Guardia	PIPER
+5	John F Kennedy Intl	PIPER
+3	Newark Liberty Intl	PIPER
+7	La Guardia	ROBINSON HELICOPTER CO
+3	La Guardia	MARZ BARRY
+2	La Guardia	STEWART MACO
+2	La Guardia	KILDALL GARY
+2	La Guardia	FRIEDEMANN JON
+1	Newark Liberty Intl	CIRRUS DESIGN CORP
+3	Newark Liberty Intl	ROBINSON HELICOPTER CO
+1	John F Kennedy Intl	MCDONNELL DOUGLAS
+1	John F Kennedy Intl	PAIR MIKE E
+2	Newark Liberty Intl	DEHAVILLAND
+1	Newark Liberty Intl	FRIEDEMANN JON
+1	John F Kennedy Intl	AVIAT AIRCRAFT INC
+2	Newark Liberty Intl	MARZ BARRY
+1	John F Kennedy Intl	AGUSTA SPA
+1	Newark Liberty Intl	BARKER JACK L
+1	John F Kennedy Intl	STEWART MACO
+
+
+Query: 
+SELECT COUNT(*) AS "total flights", name AS "Airport", manufacturer AS "Manufacturer" FROM flights
+LEFT JOIN airports ON flights.origin = airports.faa
+LEFT JOIN planes ON flights.tailnum = planes.tailnum
+WHERE (flights.year = 2013 AND flights.month = 2)
+GROUP BY faa, manufacturer;
+
+
+Part 2. Tableau performance:
+Question? What is the AVG amount of flights that Originated in JFK & Laguardia whose destination were MIA, AUS, ATL SLC?
