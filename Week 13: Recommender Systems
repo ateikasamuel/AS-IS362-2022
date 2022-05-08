@@ -1,0 +1,16 @@
+Week 13 Assignment: Recommender System
+Company: Fashion Nova
+Fashion Nova is a social-media-driven/marketed company geared toward selling affordable fashion via its online platform. Their goal is to attract their targeted demographic to purchase affordable high-end styles at an affordable price. Their targeted demographic comprises children & young adults. They have contracted several marketing techniques to achieve their goal, with the most impactful being employing Instagram models and influencers as brand ambassadors. 
+Fashion is ever-changing, and for the company to remain relevant, the company needs to be able to pivot whenever there is a change in the fashion trends or the markets. As a result, it would be beneficial for the recommender system to perform scenario designs for the organization and the customers. By doing so, the company will be in a better position to predict if a trend will continue in the future and help the company adapt and make pivotal decisions. 
+Every company should have a client-centric model, and this should most importantly be reflected through their website. The website features are a very standard online sales platform. 
+
+Key Website Features:
+•	Login Page 
+•	Wishlist
+•	Check-Out Cart
+•	The selection catalog is separated by gender, followed by the type of items. 
+
+Recommendations fo improving the website
+•	The site's recommendation system can be improved by improving its algorithms to include recommendations based on recent purchases and items you have viewed. 
+
+•	Whenever possible, they should be providing recommendations from their new arrivals based on style trends based on your purchase history or favorited items.  
